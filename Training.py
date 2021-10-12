@@ -1,3 +1,5 @@
+import copy
+
 import numpy as np
 import pandas as pd
 from ModelSelection import predictors
@@ -18,9 +20,11 @@ def model_selection(data, trains, tests, models, upper_path, n, ):
             train_y = data[trains[i], -1]
             test_x = data[tests[i], :-1]
             test_y = data[tests[i], -1]
-            scaler = preprocessing.StandardScaler()
-            pro_train_x = scaler.fit_transform(train_x)
-            pro_test_x = scaler.transform(test_x)
+            # scaler = preprocessing.StandardScaler()
+            # pro_train_x = scaler.fit_transform(train_x)
+            # pro_test_x = scaler.transform(test_x)
+            pro_train_x = copy.deepcopy(train_x)
+            pro_test_x = copy.deepcopy(test_x)
 
             model = predictors(pro_train_x, train_y, type=model_name)
             best_model = model.best_estimator_
@@ -41,7 +45,9 @@ def model_selection(data, trains, tests, models, upper_path, n, ):
 
             if model_name in ['MLR', 'Ridge', 'LASSO']:
                 importance = np.append(best_model.coef_, best_model.intercept_)
-            if model_name == 'RF':
+            if model_name in 'RF':
+                importance = best_model.feature_importances_
+            if len(importance):
                 save_to_excel_1d(importance, str(i) + 'th', wb, 'importance', i+1, 2)
 
         sheet = 'performance'
@@ -52,13 +58,13 @@ def model_selection(data, trains, tests, models, upper_path, n, ):
 
 
 if __name__ == '__main__':
-    wb_data = './Data/data_revised_90.xlsx'
-    wb_splitting = './Data/data_split_90.xlsx'
+    wb_data = './Data/data_revised_85.xlsx'
+    wb_splitting = './Data/data_split_85.xlsx'
     data = pd.read_excel(wb_data, sheet_name='data').values
     train_indices = pd.read_excel(wb_splitting, sheet_name='Train').values.T
     test_indices = pd.read_excel(wb_splitting, sheet_name='Test').values.T
 
     models = ['MLR', 'SVR', 'KNN', 'GPR', 'Ridge', 'LASSO', 'RF']
-    path = 'Result/Revised_90/Prediction'
+    path = 'Result/DataWithoutNormalization/Prediction'
     create_directory(path)
     model_selection(data, train_indices, test_indices, models, path, 10)
