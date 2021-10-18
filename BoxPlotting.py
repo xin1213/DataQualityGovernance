@@ -49,5 +49,5 @@ if __name__ == '__main__':
     for flier in f['fliers']:
         flier.set(marker='o', markerfacecolor='lightseagreen', markeredgecolor='lightseagreen', markersize=2)
     plt.tight_layout()
-    plt.savefig('./Result/Revised_90/Plotting/BoxPlot.svg')
+    plt.savefig('./Result/Revised_90/Plotting/BoxPlot.tif')
     plt.show()
