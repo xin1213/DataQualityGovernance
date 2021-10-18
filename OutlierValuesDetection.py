@@ -50,14 +50,14 @@ if __name__ == '__main__':
     t = 1
 
     wb = 'Result/Revised_90/Outliers/Values.xlsx'
-    create_directory(wb)
-    create_workbook(wb)
-    for i in range(len(original_data) - 1):
-        outlier_indices, outliers = quartile_outlier(duplicate_data[:, i])
-        save_to_excel_1d(outlier_indices, str(i) + ' th', wb, 'index', i + 1, 2)
-        save_to_excel_1d(outliers, str(i) + ' th', wb, 'value', i + 1, 2)
+    # create_directory(wb)
+    # create_workbook(wb)
+    # for i in range(len(original_data) - 1):
+    #     outlier_indices, outliers = quartile_outlier(duplicate_data[:, i])
+    #     save_to_excel_1d(outlier_indices, str(i) + ' th', wb, 'index', i + 1, 2)
+    #     save_to_excel_1d(outliers, str(i) + ' th', wb, 'value', i + 1, 2)
 
-    '''
+    # '''
     for i in [0, 2, 40]:
         outlier_indices, outliers = quartile_outlier(duplicate_data[:, i])
         all_outliers_indices.append(outlier_indices)
@@ -79,5 +79,5 @@ if __name__ == '__main__':
 
             plt.xlabel('Sample Number')
             plt.ylabel(features[i])
-    plt.savefig('Result/Revised_90/Plotting/OutlierValues.svg')
-    '''
+    plt.savefig('Result/Revised_90/Plotting/OutlierValues.tif')
+    # '''

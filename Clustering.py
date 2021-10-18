@@ -103,25 +103,26 @@ if __name__ == "__main__":
     '''
 
     # Plotting for clusters on all features / data
-    # '''
+    '''
     low_dim_data = TSNE(n_components=2, random_state=80).fit_transform(all)
-    save_path = './Result/Revised_85/Clustering/Clustering_all_data.svg'
-    # save_path = './Result/Revised_85/Clustering/Clustering_all_features.svg'
-    text = ['(A) K = 8', '(B) K = 6', '(C) K = 4', '(D) K = 2']
-    # text = ['(a) K = 8', '(b) K = 6', '(c) K = 4', '(d) K = 2']
+    # save_path = './Result/Revised_85/Clustering/Clustering_all_data.tif'
+    save_path = './Result/Revised_85/Clustering/Clustering_all_features.tif'
+    # text = ['(A) K = 8', '(B) K = 6', '(C) K = 4', '(D) K = 2']
+    text = ['(a) K = 8', '(b) K = 6', '(c) K = 4', '(d) K = 2']
     legend_columns = [2, 2, 1, 1]
     plt.figure(figsize=(20, 4))
     for i, x in enumerate([8, 6, 4, 2]):
-        classes_of_all = clustering_features(all, x)
-        # classes_of_features = clustering_features(all, x)
-        plotting_clusters_fea(x, low_dim_data, classes_of_all, [], i + 1, legend_columns, text)
+        # classes_of_all = clustering_features(all, x)
+        classes_of_features = clustering_features(features, x)
+        # plotting_clusters_fea(x, low_dim_data, classes_of_all, [], i + 1, legend_columns, text)
+        plotting_clusters_fea(x, low_dim_data, classes_of_features, [], i + 1, legend_columns, text)
     plt.savefig(save_path)
     plt.show()
-    # '''
+    '''
 
     # Plotting for clusters on the values of target
-    '''
-    save_path = './Result/Revised_85/Clustering/Clustering_target.svg'
+    # '''
+    save_path = './Result/Revised_85/Clustering/Clustering_target.tif'
     text = ['(1) K = 8', '(2) K = 6', '(3) K = 4', '(4) K = 2']
     legend_columns = [2, 2, 2, 2]
     plt.figure(figsize=(20, 4))
@@ -130,4 +131,4 @@ if __name__ == "__main__":
         plotting_clusters_tar(x, target, classes_of_target, i+1, legend_columns, text)
     plt.savefig(save_path)
     plt.show()
-    '''
+    # '''

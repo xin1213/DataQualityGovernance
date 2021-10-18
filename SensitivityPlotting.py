@@ -8,8 +8,8 @@ mpl.rcParams["font.size"] = 10
 mpl.rcParams["axes.unicode_minus"] = False
 
 if __name__ == "__main__":
-    all_feature_sets = pd.read_excel('./Result/Removed_85/FeatureSelection/ThresholdSensitivity.xlsx', sheet_name='data').values
-    # all_feature_sets = pd.read_excel('./Result/Revised_85/FeatureSelection/ThresholdSensitivity.xlsx',sheet_name='data').values
+    # all_feature_sets = pd.read_excel('./Result/Removed_85/FeatureSelection/ThresholdSensitivity.xlsx', sheet_name='data').values
+    all_feature_sets = pd.read_excel('./Result/Revised_85/FeatureSelection/ThresholdSensitivity.xlsx',sheet_name='data').values
 
     features = []
     for i in range(np.array(all_feature_sets).shape[1]):
@@ -24,8 +24,8 @@ if __name__ == "__main__":
     for m in models:
         avg_rmses, deviations = [], []
         for j in range(len(x)):
-            rmses = pd.read_excel('./Result/Removed_85/FeatureSelection/Threshold_' + str(j) + '/' + m + '.xlsx', sheet_name='performance').values[:, 0]
-            # rmses = pd.read_excel('./Result/Revised_85/FeatureSelection/Threshold_' + str(j) + '/' + m + '.xlsx',sheet_name='performance').values[:, 0]
+            # rmses = pd.read_excel('./Result/Removed_85/FeatureSelection/Threshold_' + str(j) + '/' + m + '.xlsx', sheet_name='performance').values[:, 0]
+            rmses = pd.read_excel('./Result/Revised_85/FeatureSelection/Threshold_' + str(j) + '/' + m + '.xlsx',sheet_name='performance').values[:, 0]
             avg_rmses.append(np.average(rmses))
             deviations.append(np.std(rmses))
         all_rmses.append(avg_rmses)
@@ -58,8 +58,8 @@ if __name__ == "__main__":
     left_axis.set_ylabel('Average RMSE (eV)')
     left_axis.set_xlabel('Threshold')
     left_axis.legend(ncol=1, loc='upper left')
-    right_axis.text(0.51, 33, '(a) Semi-revised data2', font={'size': 11})
-    # right_axis.text(0.55, 33, '(b) Revised data', font={'size': 11})
+    # right_axis.text(0.51, 33, '(a) Semi-revised data2', font={'size': 11})
+    right_axis.text(0.55, 33, '(b) Revised data', font={'size': 11})
     right_axis.spines['right'].set_color('mediumblue')
     right_axis.xaxis.label.set_color('mediumblue')
     right_axis.tick_params(axis='y', colors='mediumblue')
@@ -72,6 +72,6 @@ if __name__ == "__main__":
     plt.xlim(0.08, 0.70)
     plt.xticks(np.arange(np.min(xticks), np.max(xticks), 0.05))
     plt.ylim(-30, 36)
-    plt.savefig('./Result/Removed_85/FeatureSelection/Figures/Sensitivity.svg')
-    # plt.savefig('./Result/Revised_85/FeatureSelection/Figures/Sensitivity-RL.svg')
+    # plt.savefig('./Result/Removed_85/FeatureSelection/Figures/Sensitivity.tif')
+    plt.savefig('./Result/Revised_85/FeatureSelection/Figures/Sensitivity.tif')
     plt.show()
